@@ -7,6 +7,9 @@ import NotFound from "../pages/NotFound.jsx";
 import Layout from "../layouts/Layout.jsx";
 import GuestLayout from "../layouts/GuestLayout.jsx";
 
+import StudentProjects from "../components/Student/StudentProjects.jsx";
+import StudentTasks from "../components/Student/StudentTasks.jsx";
+
 import StudentDashboardLayout from "../layouts/StudentDashboardLayout.jsx";
 import StudentDashboard from "../components/Student/StudentDashboard.jsx";
 
@@ -51,6 +54,8 @@ export const redirectToDashboard = (roleType) => {
       return LOGIN_ROUTE;
   }
 };
+export const STUDENT_PROJECTS_ROUTE = "/student/projects";
+export const STUDENT_TASKS_ROUTE = "/student/tasks";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +86,14 @@ export const router = createBrowserRouter([
       {
         path: STUDENT_DASHBOARD_ROUTE,
         element: <StudentDashboard />,
+      },
+      {
+        path: STUDENT_PROJECTS_ROUTE,
+        element: <StudentProjects />,
+      },
+      {
+        path: STUDENT_TASKS_ROUTE,
+        element: <StudentTasks />,
       },
     ],
   },
