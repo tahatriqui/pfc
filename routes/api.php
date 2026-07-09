@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\StudentProjectController;
+use App\Http\Controllers\Api\TeacherProjectController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentParentController;
 use Illuminate\Http\Request;
@@ -51,5 +52,12 @@ Route::middleware(['auth:sanctum', 'ability:admin'])->prefix('admin')->group(sta
 
 Route::middleware(['auth:sanctum', 'ability:teacher'])->prefix('teacher')->group(static function () {
 });
+Route::middleware(['auth:sanctum', 'ability:teacher'])
+    ->prefix('teacher')
+    ->group(function () {
+        Route::get('/projects', [TeacherProjectController::class, 'myProjects']);
+        Route::get('/tasks', [TeacherProjectController::class, 'myTasks']);
+        Route::post('/tasks', [TeacherProjectController::class, 'createTask']);
+    });
 
 require __DIR__.'/auth.php';

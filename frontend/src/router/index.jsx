@@ -20,6 +20,8 @@ import ManageStudents from "../components/Admin/Pages/ManageStudents.jsx";
 import AdminProjects from "../components/Admin/Pages/AdminProjects.jsx";
 import AdminTasks from "../components/Admin/Pages/AdminTasks.jsx";
 
+import TeacherProjects from "../components/Teacher/TeacherProjects.jsx";
+import TeacherTasks from "../components/Teacher/TeacherTasks.jsx";
 import TeacherDashboardLayout from "../layouts/TeacherDashboardLayout.jsx";
 import TeacherDashboard from "../components/Teacher/TeacherDashboard.jsx";
 
@@ -38,6 +40,9 @@ export const ADMIN_PROJECTS_ROUTE = ADMIN_BASE_ROUTE + "/projects";
 export const ADMIN_TASKS_ROUTE = ADMIN_BASE_ROUTE + "/tasks";
 
 export const TEACHER_DASHBOARD_ROUTE = "/teacher/dashboard";
+export const TEACHER_PROJECTS_ROUTE = "/teacher/projects";
+export const TEACHER_TASKS_ROUTE = "/teacher/tasks";
+
 export const PARENT_DASHBOARD_ROUTE = "/parent/dashboard";
 
 export const redirectToDashboard = (roleType) => {
@@ -54,6 +59,7 @@ export const redirectToDashboard = (roleType) => {
       return LOGIN_ROUTE;
   }
 };
+
 export const STUDENT_PROJECTS_ROUTE = "/student/projects";
 export const STUDENT_TASKS_ROUTE = "/student/tasks";
 
@@ -137,6 +143,14 @@ export const router = createBrowserRouter([
       {
         path: TEACHER_DASHBOARD_ROUTE,
         element: <TeacherDashboard />,
+      },
+      {
+        path: TEACHER_PROJECTS_ROUTE,
+        element: <TeacherProjects />,
+      },
+      {
+        path: TEACHER_TASKS_ROUTE,
+        element: <TeacherTasks />,
       },
     ],
   },
