@@ -1,13 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "../../components/ui/button.jsx";
-import { Link } from "react-router-dom";
-import {
-  ADMIN_DASHBOARD_ROUTE,
-  ADMIN_MANAGE_PARENTS_ROUTE,
-  ADMIN_MANAGE_STUDENTS_ROUTE,
-  ADMIN_PROJECTS_ROUTE,
-  ADMIN_TASKS_ROUTE,
-} from "../../router/index.jsx";
+import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboardIcon,
   GraduationCapIcon,
@@ -16,52 +9,76 @@ import {
   ClipboardListIcon,
 } from "lucide-react";
 
+import {
+  ADMIN_DASHBOARD_ROUTE,
+  ADMIN_MANAGE_PARENTS_ROUTE,
+  ADMIN_MANAGE_STUDENTS_ROUTE,
+  ADMIN_PROJECTS_ROUTE,
+  ADMIN_TASKS_ROUTE,
+} from "../../router/index.jsx";
+
 export function AdminAdministrationSideBar({ className }) {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
+  const menuItems = [
+    {
+      label: "Dashboard",
+      path: ADMIN_DASHBOARD_ROUTE,
+      icon: LayoutDashboardIcon,
+    },
+    {
+      label: "Parents",
+      path: ADMIN_MANAGE_PARENTS_ROUTE,
+      icon: UserIcon,
+    },
+    {
+      label: "Students",
+      path: ADMIN_MANAGE_STUDENTS_ROUTE,
+      icon: GraduationCapIcon,
+    },
+    {
+      label: "Projects",
+      path: ADMIN_PROJECTS_ROUTE,
+      icon: FolderKanbanIcon,
+    },
+    {
+      label: "Tasks",
+      path: ADMIN_TASKS_ROUTE,
+      icon: ClipboardListIcon,
+    },
+  ];
+
   return (
-    <div className={cn("pb-12", className)}>
-      <div className="space-y-4 py-4">
-        <div className="px-3 py-2">
-          <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            Administration
-          </h2>
+    <div className={cn("px-4 py-6 text-white", className)}>
+      <p className="mb-4 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
+        Main
+      </p>
 
-          <div className="space-y-1">
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link to={ADMIN_DASHBOARD_ROUTE}>
-                <LayoutDashboardIcon className="mr-2 h-4 w-4" />
-                Dashboard
+      <div className="space-y-2">
+        {menuItems.map((item) => {
+          const Icon = item.icon;
+          const active = isActive(item.path);
+
+          return (
+            <Button
+              key={item.path}
+              asChild
+              variant="ghost"
+              className={`h-12 w-full justify-start rounded-xl text-sm font-semibold transition ${
+                active
+                  ? "border border-blue-500/60 bg-blue-600/20 text-white shadow-[0_0_20px_rgba(37,99,235,0.25)] hover:bg-blue-600/25"
+                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+              }`}
+            >
+              <Link to={item.path}>
+                <Icon className="mr-3 h-5 w-5" />
+                {item.label}
               </Link>
             </Button>
-
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link to={ADMIN_MANAGE_PARENTS_ROUTE}>
-                <UserIcon className="mr-2 h-4 w-4" />
-                Parents
-              </Link>
-            </Button>
-
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link to={ADMIN_MANAGE_STUDENTS_ROUTE}>
-                <GraduationCapIcon className="mr-2 h-4 w-4" />
-                Students
-              </Link>
-            </Button>
-
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link to={ADMIN_PROJECTS_ROUTE}>
-                <FolderKanbanIcon className="mr-2 h-4 w-4" />
-                Projects
-              </Link>
-            </Button>
-
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link to={ADMIN_TASKS_ROUTE}>
-                <ClipboardListIcon className="mr-2 h-4 w-4" />
-                Tasks
-              </Link>
-            </Button>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import {
   LayoutDashboardIcon,
   FolderKanbanIcon,
   ClipboardListIcon,
+  GraduationCapIcon,
 } from "lucide-react";
 
 import {
@@ -37,35 +38,46 @@ export function TeacherAdministrationSideBar({ className }) {
   ];
 
   return (
-    <div className={cn("pb-12 text-white", className)}>
-      <div className="px-3 py-4">
-        <h2 className="mb-4 px-4 text-lg font-semibold tracking-tight">
-          Teacher Space
-        </h2>
+    <div className={cn("px-4 py-6 text-white", className)}>
+      <p className="mb-4 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
+        Teacher
+      </p>
 
-        <div className="space-y-2">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
+      <div className="space-y-2">
+        {menuItems.map((item) => {
+          const Icon = item.icon;
+          const active = isActive(item.path);
 
-            return (
-              <Button
-                key={item.path}
-                asChild
-                variant={isActive(item.path) ? "secondary" : "ghost"}
-                className={`w-full justify-start ${
-                  isActive(item.path)
-                    ? "bg-white text-slate-950 hover:bg-white"
-                    : "text-white hover:bg-slate-800 hover:text-white"
-                }`}
-              >
-                <Link to={item.path}>
-                  <Icon className="mr-2 h-4 w-4" />
-                  {item.label}
-                </Link>
-              </Button>
-            );
-          })}
+          return (
+            <Button
+              key={item.path}
+              asChild
+              variant="ghost"
+              className={`h-12 w-full justify-start rounded-xl text-sm font-semibold transition ${
+                active
+                  ? "border border-cyan-500/60 bg-cyan-600/20 text-white shadow-[0_0_20px_rgba(6,182,212,0.25)] hover:bg-cyan-600/25"
+                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
+              }`}
+            >
+              <Link to={item.path}>
+                <Icon className="mr-3 h-5 w-5" />
+                {item.label}
+              </Link>
+            </Button>
+          );
+        })}
+      </div>
+
+      <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+        <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300">
+          <GraduationCapIcon className="h-5 w-5" />
         </div>
+
+        <p className="text-sm font-semibold text-white">Encadrant</p>
+        <p className="mt-1 text-xs leading-5 text-slate-400">
+          Suivez les projets, créez des tâches et contrôlez l’avancement des
+          étudiants.
+        </p>
       </div>
     </div>
   );
