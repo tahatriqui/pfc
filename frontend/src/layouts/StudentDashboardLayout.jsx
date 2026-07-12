@@ -92,16 +92,7 @@ export default function StudentDashboardLayout() {
                   Dashboard
                 </Link>
 
-                <button className="hidden rounded-xl border border-slate-800 bg-slate-900/70 p-3 text-slate-300 transition hover:bg-slate-800 md:block">
-                  <SearchIcon className="h-5 w-5" />
-                </button>
-
-                <button className="relative hidden rounded-xl border border-slate-800 bg-slate-900/70 p-3 text-slate-300 transition hover:bg-slate-800 md:block">
-                  <BellIcon className="h-5 w-5" />
-                  <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-xs text-white">
-                    1
-                  </span>
-                </button>
+               
 
                 <StudentDropDownMenu />
                 <ModeToggle />
